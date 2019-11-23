@@ -1,0 +1,217 @@
+<!-- SUBTITLE: useContext -->
+
+<Layout header>
+
+# useContext
+
+</Layout>
+
+---
+
+<Layout>
+
+<CodeSurferColumns>
+
+<Step>
+
+```jsx
+const CounterContext = 
+    createContext({ counter, increment, decrement });
+
+class Counter extends Component {
+    static contextType = CounterContext;
+
+    render() {
+        const { counter, increment, decrement } =
+            this.context;
+
+        return <div>
+            <button onClick={increment}>Increment</button>
+            <p>Count: {counter}<p> 
+            <button onClick={decrement}>Increment</button>
+        </div>
+    }
+}
+```
+
+<div>
+
+Let's start off, again, with our counter, in Component format. 
+
+Let's assume we've already created a context with our `counter`, `increment` and `decrement` methods, and created a **Provider** somewhere higher up the chain of command.
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 5
+```
+
+<div>
+
+Then we'd have to declare it as the **only** (!!!) context type available to this Component
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 8:9
+```
+
+<div>
+
+And then consume it to be used in rendering.
+
+The con here is that there can only be only one context.
+
+</div>
+
+</Step>
+
+</CodeSurferColumns>
+
+</Layout>
+
+---
+
+<Layout>
+
+<CodeSurferColumns>
+
+<Step>
+
+```jsx
+const CounterContext = 
+    createContext({ counter, increment, decrement });
+
+const Counter = () => (
+    <CounterContext.Consumer>
+        {({ counter, increment, decrement }) => (
+            <div>
+                <button onClick={increment}>Increment</button>
+                <p>Count: {counter}<p> 
+                <button onClick={decrement}>Increment</button>
+            </div>
+        )}
+    </CounterContext.Consumer>
+}
+```
+
+<div>
+
+Let's take another example, with **render props** and a **Consumer**
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 5,13
+```
+
+<div>
+
+Then we'd have to render the consumer...
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 6:12
+```
+
+<div>
+
+And then use a **render prop** to retrieve the data, and use it in rendering.
+
+The cons here are that the information cannot be consumed before rendering, at this component's level.
+
+</div>
+
+</Step>
+
+</CodeSurferColumns>
+
+</Layout>
+
+---
+
+<Layout>
+
+<CodeSurferColumns>
+
+<Step>
+
+```jsx
+const CounterContext = 
+    createContext({ counter, increment, decrement });
+
+const Counter = () => {
+    const { counter, increment, decrement } = useContext(CounterContext);
+    return (
+        <div>
+            <button onClick={increment}>Increment</button>
+            <p>Count: {counter}<p> 
+            <button onClick={decrement}>Increment</button>
+        </div>
+    );
+}
+```
+
+<div>
+
+And finally, what we've been waiting for, the hooks variant.
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 5
+```
+
+<div>
+
+All we have to do is consume the context directly
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff
+```
+
+<div>
+    
+Pros include having multiple contexts consumed in the same place, and a lot less code to write for one thing.
+
+Cons: ???
+
+</div>
+
+</Step>
+
+</CodeSurferColumns>
+
+</Layout>
+
+---
+
+<Layout>
+
+# useContext - Takeaways
+
+- Can consume N contexts, before rendering
+- Can be used in conjunction with other use hooks
+
+</Layout>

@@ -1,0 +1,71 @@
+<!-- SUBTITLE: useField -->
+
+<Layout header>
+
+# Editor Component
+
+</Layout>
+
+---
+
+<Layout>
+
+<div style={{ maxWidth: 1000 }}>
+
+In this exercise, we will be creating a `useField` functionality, which will handle the input and validation of a certain text field, and which we will then refactor into a component + hook combo.
+
+For this purpose, we will be using the **Editor Component**.
+
+</div>
+
+</Layout>
+
+---
+
+<Layout>
+
+This is how the editor component will look like:
+
+<style>{`
+  .MuiCardContent-root > div {
+    font-size: initial;
+  }
+`}</style>
+
+<div>
+
+<AppWrapper> 
+
+<Editor />
+
+</AppWrapper> 
+
+</div>
+
+</Layout>
+
+---
+
+<Layout>
+
+Or, with the addition of our `useFocus`... 
+
+This is how the editor component will look like:
+
+<style>{`
+  .MuiCardContent-root > div {
+    font-size: initial;
+  }
+`}</style>
+
+<div>
+
+<AppWrapper> 
+
+<Editor focusable />
+
+</AppWrapper>
+
+</div>
+
+</Layout>

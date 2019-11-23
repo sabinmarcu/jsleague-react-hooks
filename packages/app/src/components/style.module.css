@@ -1,0 +1,24 @@
+.layout {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 50px;
+  box-sizing: border-box;
+}
+
+.card {
+  flex: 1;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.cardMedia {
+  min-height: 300px;
+}
+
+.fieldList > div {
+  margin: 7px 0;
+}

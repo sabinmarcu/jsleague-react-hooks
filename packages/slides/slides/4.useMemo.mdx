@@ -1,0 +1,159 @@
+<!-- SUBTITLE: useMemo -->
+
+<Layout header>
+
+# useMemo
+
+</Layout>
+
+---
+
+<Layout>
+
+<CodeSurferColumns>
+
+<Step>
+
+```jsx
+const Counter = () => {
+    const [count, setCount] = useState(0);
+
+    const [hasCounted, setHasCounted] = useState(false);
+    useEffect(
+        () => { 
+            if (count !== 0) { 
+                setHasCounted(true); 
+            } 
+        },
+        [count],
+    );
+
+    const title = useMemo(
+        () => hasCounted ? `Counted ${count}` : `Ready to count`,
+        [hasCounted, count],
+    );
+    useEffect(
+        () => document.title = title,
+        [title],
+    );
+
+    return <div>
+        <h1>{title}</h1>
+        <button onClick={increment}>Increment</button>
+        <p>Count: {counter}<p> 
+        <button onClick={decrement}>Increment</button>
+    </div>;
+}
+```
+
+<div>
+
+Let's take the counter example again.
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 2
+```
+
+<div>
+
+We have our counter state...
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 4
+```
+
+<div>
+
+But we take another state, that we will update with `useEffect`, to show the difference.
+
+</div>
+
+</Step>
+
+
+<Step>
+
+```diff 5:12
+```
+
+<div>
+
+We use a `useEffect` to update our `hasCounted` on `count` change, as long as `count` is different from 0.
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 14:17
+```
+
+<div>
+
+However, `useMemo` can be more helpful while **deriving** data from state.
+
+In this case, we're depending on `hasCounted` and `count` to compute the title (both of the component, and the document).
+
+`useMemo` has the same pattern as all the other hooks, a function to be executed, when any of the dependencies have changed. 
+
+The result of the function will be assigned to the variable (in our case, `title`);
+
+</div>
+
+</Step>
+
+
+
+<Step>
+
+```diff 18:21
+```
+
+<div>
+
+We can use a `useEffect` more effectively when there is a side-effect to be considered, such as updating the document title.
+
+</div>
+
+</Step>
+
+</CodeSurferColumns>
+
+</Layout>
+
+---
+
+<Layout>
+
+# useMemo - Takeaways
+
+- Granular Control
+- Memoized Returns
+- Mostly used for derived data
+- Takes a function that returns the value ( () => T ) 
+
+</Layout>
+
+---
+
+<Layout>
+
+# useMemo - Best Practices
+
+- Use as much as needed instead of useState
+- Be careful with the input array, make sure it's satisfactory to the output
+- Remember that useState setters change on value set
+- If derived data is a function, use useCallback instead
+
+</Layout>

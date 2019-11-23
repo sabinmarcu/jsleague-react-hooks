@@ -1,0 +1,84 @@
+import Layout, { SectionTitle, SectionSubtitle } from '@jslrh/components/src/Layout';
+import { Link, Words, Code } from '@jslrh/components';
+import { themes, Invert, Split, Appear, Notes } from 'mdx-deck'
+import { CodeSurfer, CodeSurferColumns, Step } from "code-surfer";
+import { duotoneLight, github } from "@code-surfer/themes";
+import Preview from '@jslrh/app/src/components/Preview';
+import Editor from '@jslrh/app/src/components/Editor';
+import App, { AppWrapper } from '@jslrh/app/src/App';
+
+export const theme = [themes.default];
+
+<SectionTitle>Intro to React Hooks</SectionTitle>
+
+<Layout 
+  noTitle
+  noSubtitle
+  icon={'https://s3.amazonaws.com/media-p.slid.es/uploads/841906/images/5646147/logo-slim-white.png'} 
+  background={'https://s3.amazonaws.com/media-p.slid.es/uploads/841906/images/5646146/Screen_Shot_2019-01-05_at_1.59.35_PM.png'}
+  style={{ color: 'white' }}
+>
+
+# Intro to React Hooks
+
+#### 23 November 2019
+
+</Layout>
+
+---
+
+<Layout header>
+
+# Code of Conduct
+
+<div style={{ textAlign: 'justify '}}>
+
+We expect cooperation from all participants to help ensure a safe environment for everybody.
+
+We treat everyone with respect, we refrain from using offensive language and imagery, and we encourage to report any derogatory or offensive behavior to a member of the JSLeague community.
+
+We provide a fantastic environment for everyone to learn and share skills regardless of gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, ethnicity, religion (or lack thereof), or technology choices.
+
+We value your attendance and your participation in the JSLeague community and expect everyone to accord to the community Code of Conduct at all JSLeague workshops and other events.
+
+</div>
+
+</Layout>
+
+--- 
+
+<Layout>
+
+<Split>
+
+<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '50vw' }}>
+
+<img 
+  src="https://scontent.fotp3-2.fna.fbcdn.net/v/t1.0-9/30516640_1677492658984219_7229603649175945216_n.jpg?_nc_cat=100&_nc_ohc=11itfIy5bbQAQkOCwfY45pBTxNccawCp9HnRKEB1Krcoza6cD_ktCxq8w&_nc_ht=scontent.fotp3-2.fna&oh=f7b0211986cc81d300c37de914ee18a2&oe=5E421707" 
+  style={{ 
+    borderRadius: "100%",
+    width: '25vmin',
+    height: '25vmin',
+  }}
+/>
+
+</div>
+
+<div style={{ textAlign: 'left', width: '50vw' }}>
+
+## Sabin Marcu
+
+<Appear>
+
+<li>Software Engineer @ R/GA</li>
+<li>Anything web since '09</li>
+<li>React since 2015</li>
+<li>React &amp; GraphQL @ JSLeague</li>
+
+</Appear>
+
+</div>
+
+</Split>
+
+</Layout>

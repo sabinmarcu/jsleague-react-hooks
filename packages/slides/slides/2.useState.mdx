@@ -1,0 +1,215 @@
+<!-- SUBTITLE: useState -->
+
+<Layout header>
+
+# useState
+
+</Layout>
+
+---
+
+<Layout>
+
+<CodeSurferColumns>
+
+<Step>
+
+```jsx
+class Counter extends Component {
+    state = {
+        counter: 0
+    }
+
+    increment = () => this.setState(
+        ({ counter }) => ({ counter: counter + 1 })
+    )
+
+    decrement = () => this.setState(
+        ({ counter }) => ({ counter: counter - 1 })
+    )
+
+    render() {
+        return <div>
+            <button 
+              onClick={this.increment}
+            >Increment</button>
+
+            <p>Count: {counter}<p> 
+
+            <button 
+              onClick={this.decrement}
+            >Increment</button>
+        </div>
+    }
+}
+```
+
+Your classic counter class, right?
+
+</Step>
+
+<Step>
+
+```diff 2:4
+```
+
+We have our state...
+
+</Step>
+
+<Step>
+
+
+```diff 6:8,10:12
+```
+
+We have our increment and decrement functions...
+
+</Step>
+
+<Step>
+
+```diff 14:30
+```
+
+<div>
+
+And finally our render function... 
+
+Pretty standard, right?
+
+</div>
+
+</Step>
+
+</CodeSurferColumns>
+
+</Layout>
+
+---
+
+<Layout>
+
+<CodeSurferColumns>
+
+<Step>
+
+```jsx
+const Counter = () => {
+    const [count, setCount] = useState(0);
+
+    const increment = () => 
+      setCount(count + 1);
+
+    const decrement = () => 
+      setCount(count - 1);
+
+    return <div>
+
+        <button 
+          onClick={increment}
+        >Increment</button>
+
+        <p>Count: {counter}<p> 
+
+        <button 
+          onClick={decrement}
+        >Increment</button>
+
+    </div>;
+}
+```
+
+Well, here we have the React Hooks version.
+
+</Step>
+
+<Step>
+
+```diff 2
+```
+
+We have our state...
+
+</Step>
+
+<Step>
+
+```diff 4:8
+```
+
+Our setters...
+
+</Step>
+
+<Step>
+
+```diff 10:30
+```
+
+And our render.
+
+</Step>
+
+<Step>
+
+```diff
+```
+
+Simpler and more to the point, right?
+
+</Step>
+
+<Step>
+
+```diff 2[12:27,40]
+```
+
+<div>
+
+Let's break it down.
+
+We create a new state, with initial value `0`, and receive the value (`count`) and a setter (`setCount`)
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 5,8
+```
+
+Then our `increment` and `decrement` methods simply use the setters.
+
+</Step>
+
+</CodeSurferColumns>
+
+</Layout>
+
+---
+
+<Layout>
+
+# useState - Takeaways
+
+
+- Granular Control
+- Memoized Functions
+- Takes in an update object or update function ( T | T => T )
+- Changes value and setter on each value change
+
+</Layout>
+
+---
+
+<Layout>
+
+# useState - Best Practices
+
+- Keep the amount of state data to a minimum
+- Prefer derived data (see: later)
+- Make sure that, if you need your state to be a function, you prevent useState from treating your inbound state as an update function ( T => T ). 
+
+</Layout>

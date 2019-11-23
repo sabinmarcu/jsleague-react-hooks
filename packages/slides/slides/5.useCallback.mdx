@@ -1,0 +1,81 @@
+<!-- SUBTITLE: useCallback -->
+
+<Layout header>
+
+# useCallback
+
+</Layout>
+
+---
+
+<Layout>
+
+<CodeSurferColumns>
+
+<Step>
+
+```jsx
+const Counter = () => {
+    const [count, setCount] = useState(0);
+
+    const increment = useMemo(
+        () => 
+            () => setCount(count => count + 1),
+        [setCount],
+    );
+    const decrement = useCallback(
+        () => setCount(count => count - 1),
+        [setCount],
+    );
+
+    return <div>
+        <button onClick={increment}>Increment</button>
+        <p>Count: {counter}<p> 
+        <button onClick={decrement}>Increment</button>
+    </div>;
+}
+```
+
+<div>
+
+All in all, `useCallback` is a shorthand for `useMemo`.
+
+Consider the example of wanting to *memo* a function...
+
+Where the form of `useMemo` is `(() => T, D)`, where `T` is our result, and `D` the list of dependencies, if `T` is a function of type `() => V`, it resolves to `(() => () => V, D)`.
+
+In the same situation, `useCallback` would have a form of `(T, D)`, or `(() => V, D)`
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 4:8
+```
+
+<div>
+
+With `useMemo` we'd have a function returning our function (`increment`).
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 9:12
+```
+
+<div>
+
+While `useCallback` would be more useful in generating the other function (`decrement`)
+
+</div>
+
+</Step>
+
+</CodeSurferColumns>
+
+</Layout>

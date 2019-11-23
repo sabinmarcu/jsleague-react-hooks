@@ -1,0 +1,375 @@
+<!-- SUBTITLE: useEffect -->
+
+<Layout header>
+
+# useEffect
+
+</Layout>
+
+---
+
+<Layout>
+
+<CodeSurferColumns>
+
+<Step>
+
+```jsx
+class Counter extends Component {
+    state = {
+        counter: 0
+    }
+
+    componentDidMount() {
+        document.title = `Ready to count!`;
+    }
+
+    componentDidUpdate(props, state) {
+        if (this.state.counter !== state.counter) {
+            document.title = `Counted: ${state.counter}`;
+        }
+    }
+
+    render() {
+        return <div>
+            <button onClick={increment}>Increment</button>
+            <p>Count: {counter}<p> 
+            <button onClick={decrement}>Increment</button>
+        </div>
+    }
+}
+```
+
+<div>
+
+Again, counter, but with a twist. We'll skip the state part, for now.
+
+As you can see, we're updating the document title on changes. 
+
+Which means...
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 6:8
+```
+
+We need to update on mount...
+
+</Step>
+
+<Step>
+
+
+```diff 10:15
+```
+
+And on component update, to check if the counter has indeed changed, and then update the title.
+
+</Step>
+
+</CodeSurferColumns>
+
+</Layout>
+
+---
+
+<Layout>
+
+<CodeSurferColumns>
+
+<Step>
+
+```jsx
+const Counter = () => {
+    const [count, setCount] = useState(0);
+
+    useEffect(
+        () => document.title = `Counted ${count}`,
+        [count],
+    );
+    useEffect(
+        () => document.title = `Ready to count`,
+        [],
+    );
+
+    return <div>
+        <button onClick={increment}>Increment</button>
+        <p>Count: {counter}<p> 
+        <button onClick={decrement}>Increment</button>
+    </div>;
+}
+```
+
+<div>
+
+In hooks, we can simulate both, but with better control.
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 4:7
+```
+
+We can update the title on `count` changes...
+
+</Step>
+
+<Step>
+
+
+```diff 8:11
+```
+
+And on `mount` (in hooks terms, execute effect only once).
+
+</Step>
+
+<Step>
+
+
+```diff 4:7
+```
+
+<div>
+
+Let's break it down.
+
+This translates to: 
+
+</div>
+
+</Step>
+
+<Step>
+
+
+```diff 5
+```
+
+<div>
+
+Execute this function
+
+</div>
+
+</Step>
+
+<Step>
+
+
+```diff 6
+```
+
+<div>
+
+When an item in this array has changed (in our case, `count`)
+
+</div>
+
+</Step>
+
+<Step>
+
+
+```diff 8:11
+```
+
+<div>
+
+Whereas this translates to: 
+
+</div>
+
+</Step>
+
+<Step>
+
+
+```diff 9
+```
+
+<div>
+
+Execute this function...
+
+</div>
+
+</Step>
+
+<Step>
+
+
+```diff 10
+```
+
+<div>
+
+When... well, our array is empty, so only once. 
+
+A `null`/`undefined` parameter, instead of an empty array would mean 'execute every time'.
+
+</div>
+
+</Step>
+
+</CodeSurferColumns>
+
+</Layout>
+
+---
+
+<Layout>
+
+<CodeSurferColumns>
+
+<Step>
+
+```jsx
+const NotificationsBadge = ({ id }) => {
+    const [notifications, setNotifications] = useState([]);
+
+    useEffect(
+        () => {
+            const subscription = API.subscribeToNotifications(
+                id,
+                notification => setNotifications(
+                    notifications => [...notifications, notification]
+                )
+            );
+            return subscription.unsubscribe;
+        },
+        [id],
+    );
+
+    return (...);
+}
+```
+
+<div>
+
+Let's take another example. Subscribing to notifications.
+
+We want to subscribe to notifications for a given `id`, but **unsubscribe** and **resubscribe** once the `id` changes.
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 4:15
+```
+
+<div>
+
+Let's break this one down, as well, and see how the unsubscribe works.
+
+Let's say our subscription API has a `subscribeToNotifications` function that takes in an `id` and a callback with new notifications.
+
+The subscription also has an `unsubscribe` method.
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 14
+```
+
+<div>
+
+Our first step, actually, is to define our dependencies. 
+
+In other words, **when do we do make any changes**?
+
+In our case, when the `id` changes, naturally
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 6:11
+```
+
+<div>
+
+Then we subscribe to our notifications.
+
+We're not going to go into state, but the `subscription` variable. Right now, we're subscribed to notifications for `id = 3`, let's say.
+
+A `useEffect` hook will execute the return value from the execution function on subsequent hook functions. Therefore...
+
+</div>
+
+</Step>
+
+<Step>
+
+```diff 12
+```
+
+<div>
+
+We return our unsubscribe method.
+
+</div>
+
+</Step>
+
+
+
+<Step>
+
+```diff
+```
+
+<div>
+
+Let's take an overall look, again, and go through it.
+
+</div>
+
+</Step>
+
+
+
+</CodeSurferColumns>
+
+</Layout>
+
+---
+
+<Layout>
+
+# useEffect - Takeaways
+
+- Scoped to memoized input array
+- Takes in an effect function
+- Effect function acts as an effect constructor, that returns the effect destructor
+- Creates a subscription
+- Handles functionality
+- Returns the unsubscribe handler
+
+</Layout>
+
+---
+
+<Layout>
+
+# useEffect - Best Practices
+
+- Don't duplicate effects on input array
+- Use block functions as a default, to prevent useEffect interpreting any return values as functions (when they are by-products of an update process, for example)
+- If dealing with effects that need destructuring on change, make sure to return a destructure function
+
+</Layout>

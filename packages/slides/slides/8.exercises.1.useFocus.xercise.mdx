@@ -1,0 +1,65 @@
+<!-- SUBTITLE: useFocus -->
+
+<Layout hader>
+
+# Preview Component 
+
+</Layout>
+
+---
+
+<Layout>
+
+<div style={{ maxWidth: 1000 }}>
+
+In this exercise, we will be creating a `useFocus` functionality, and, further down the line, a custom hook that will handle the functionality universally.
+
+For this purpose, we will be using the **Preview Component**.
+
+</div>
+
+</Layout>
+
+---
+
+<Layout>
+
+This is how the preview component will look like without our edits:
+
+<style>{`
+  .MuiCardContent-root > div {
+    font-size: initial;
+  }
+`}</style>
+
+<div style={{ minWidth: 600 }}>
+
+<Preview id="preview" />
+
+</div>
+
+</Layout>
+
+---
+
+<Layout>
+
+This is how the preview component will look like **with** our edits:
+
+<style>{`
+  .MuiCardContent-root > div {
+    font-size: initial;
+  }
+`}</style>
+
+<div style={{ minWidth: 600 }}>
+
+<Preview 
+  id="preview" 
+  focusable 
+  {...({ title: "Now I am focusable", content: '# Hover over me!' })}
+/>
+
+</div>
+
+</Layout>
